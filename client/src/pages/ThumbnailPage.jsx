@@ -3,6 +3,9 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Autoplay from "embla-carousel-autoplay";
 import Navbar from "@/shared/Navbar";
 import Footer from "@/shared/Footer";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 export default function ThumbnailPage() {
   return (
@@ -58,6 +61,12 @@ export default function ThumbnailPage() {
           <img src="/thumbnail.jpg" className="w-full h-60 object-fill"/>
         </div>
       </div>
+
+      <div className="flex mt-6">
+        <Input type="text" className="md:w-96 rounded-tr-none rounded-br-none" placeholder="Search Your Place"/>
+        <Button className="bg-yellow-400 rounded-tl-none rounded-bl-none hover:bg-yellow-500"><Search/></Button>
+      </div>
+
       <div className="mt-6">
       <Footer/>
       </div>

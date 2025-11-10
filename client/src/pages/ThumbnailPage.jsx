@@ -62,7 +62,7 @@ export default function ThumbnailPage() {
         </div>
       </div>
 
-      <div className="flex mt-6">
+      <div className="flex mt-6 justify-center">
         <Input type="text" className="md:w-96 rounded-tr-none rounded-br-none" placeholder="Search Your Place"/>
         <Button className="bg-yellow-400 rounded-tl-none rounded-bl-none hover:bg-yellow-500"><Search/></Button>
       </div>

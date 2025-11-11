@@ -3,6 +3,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
+const userRoutes = require("./routes/user.route");
+
 const app = express();
 app.use(express.json());
 app.use(cors({
@@ -10,5 +12,7 @@ app.use(cors({
     credentials: true,
 }))
 app.use(cookieParser());
+
+app.use("/nest/v1/user",userRoutes);
 
 module.exports = app;

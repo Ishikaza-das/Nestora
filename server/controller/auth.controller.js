@@ -8,8 +8,8 @@ const transporter = require("../utils/emailTransporter");
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
+    const { name, email, password, phone} = req.body;
+    if (!name || !email || !password || !phone) {
       return res.status(400).json({
         message: "Somrthing is missing",
         success: false,
@@ -38,6 +38,7 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
       profilePic,
+      phone,
     });
     return res.status(201).json({
       message: "Account created successfully",

@@ -4,4 +4,6 @@ const storage = multer.memoryStorage();
 
 const Upload = multer({storage}).single("file");
 
-module.exports = {Upload}
+const multiUpload = multer({storage}).array("files",10);
+
+module.exports = {Upload, multiUpload};

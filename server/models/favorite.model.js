@@ -5,4 +5,4 @@ const favoriteSchema = new mongoose.Schema({
     propertyId:{type:mongoose.Schema.Types.ObjectId,ref:"Property"},
 },{timestamps:true});
 
-module.exports = mongoose.Schema(favoriteSchema,"Favorite");
+module.exports = mongoose.model(favoriteSchema,"Favorite");

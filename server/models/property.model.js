@@ -5,15 +5,15 @@ const propertySchema = new mongoose.Schema({
     description:{type:String},
     price:{type:Number,required:true},
     location:{type:String,required:true},
-    latitude:{type:Float},
-    longitude:{type:Float},
+    latitude:{type:Number},
+    longitude:{type:Number},
     bedrooms:{type:Number,required:true},
     bathrooms:{type:Number,required:true},
-    amenities:[{type:String}],
-    propertyType:{type:String,enum:["apartment","house"],require:true},
-    images:[{type:String,default:""}],
-    status:{type:String,enum:["available","rented"]},
+    amenities:{type:[String]},
+    propertyType:{type:String,require:true},
+    images:{type:[String],default:[]},
+    status:{type:String,enum:["available","rented"],default:"available"},
     landlordId:{type:mongoose.Schema.Types.ObjectId,ref:"User"}
 },{timestamps:true})
 
-module.exports = mongoose.Schema("Property",propertySchema);
+module.exports = mongoose.model("Property",propertySchema);

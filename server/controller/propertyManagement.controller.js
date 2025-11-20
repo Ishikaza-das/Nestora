@@ -1,10 +1,11 @@
 const Property = require("../models/property.model");
 const getDataUri = require("../utils/datauri");
 const cloudinary = require("../utils/cloudinary");
+const {geocodeAddress} = require("../utils/geocode");
 
 const createProperty = async (req, res) => {
   try {
-    const { title, description, price, location, latitude, longitude, bedrooms, bathrooms, amenities, propertyType } = req.body;
+    const { title, description, price, location, bedrooms, bathrooms, amenities, propertyType } = req.body;
     const userId = req.id;
     if (!title ||!price ||!location ||!bedrooms ||!bathrooms ||!propertyType) {
       return res.status(400).json({
@@ -12,9 +13,12 @@ const createProperty = async (req, res) => {
         success: false,
       });
     }
+    const {latitude, longitude} = await geocodeAddress(location);
+
     const splitAmities = Array.isArray(amenities)
       ? amenities
       : amenities.split(",").map((a) => a.trim());
+      
     const property = await Property.create({
       title,
       description,

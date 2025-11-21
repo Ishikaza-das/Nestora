@@ -2,6 +2,7 @@ const Property = require("../models/property.model");
 const getDataUri = require("../utils/datauri");
 const cloudinary = require("../utils/cloudinary");
 const {geocodeAddress} = require("../utils/geocode");
+const getPublicIdFromurl = require("../utils/cloudinaryPublicId");
 
 const createProperty = async (req, res) => {
   try {
@@ -186,6 +187,53 @@ const deleteProperty = async (req,res) => {
   }
 }
 
+const deletepropertyPhoto = async (req,res) => {
+  try {
+    const propertyId = req.params.Id;
+    const photoUrl = req.params.photoId;
+
+    const property = await Property.findById(propertyId);
+    if(!property){
+      return res.status(404).json({
+        message:"Property not found",
+        success: false
+      })
+    }
+
+    if(!property.images.includes(photoUrl)){
+      return res.status(400).json({
+        message: "Property image not found",
+        success: false,
+      })
+    }
+
+    const publicId = getPublicIdFromurl(photoUrl);
+
+    if(!publicId){
+      return res.status(400).json({
+        message: "Invalid image URL",
+        success: false
+      })
+    }
+
+    await cloudinary.uploader.destroy(publicId);
+
+    property.images = property.images.filter((img) => img !== photoUrl);
+    await property.save();
+
+    return res.status(200).json({
+      message: "Image deleted successfully",
+      images: property.images,
+      success: true
+    })
+  } catch (error) {
+    return res.status(200).json({
+      message: error.message,
+      success: false
+    })
+  }
+}
+
 const userListedProperty = async (req,res) => {
   try {
     const userId = req.id;
@@ -209,4 +257,4 @@ const userListedProperty = async (req,res) => {
   }
 }
 
-module.exports = { createProperty, uploadImages, updatePropertyDetails, updatePropertyStatus, deleteProperty, userListedProperty};
+module.exports = { createProperty, uploadImages, updatePropertyDetails, updatePropertyStatus, deleteProperty, deletepropertyPhoto, userListedProperty};

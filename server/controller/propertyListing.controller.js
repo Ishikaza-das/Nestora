@@ -84,4 +84,19 @@ const searchProperties = async (req,res) => {
     }
 }
 
-module.exports = {allProperties, getSingleProperty, searchProperties};
+const coordinatesMapProperty = async (req,res) =>{
+    try {
+        const properties = await Property.find({},{title:1, latitude:1, longitude:1});
+        return res.status(200).json({
+            properties,
+            success: true
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+            success: false
+        })
+    }
+}
+
+module.exports = {allProperties, getSingleProperty, searchProperties, coordinatesMapProperty};

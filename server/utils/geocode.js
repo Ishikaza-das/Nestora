@@ -5,11 +5,10 @@ const geocodeAddress = async (address) => {
 
   const response = await axios.get(url, {
     headers: {
-      "User-Agent": "NestoraApp/1.0 (deployserver7@gmail.com)"
+      "User-Agent": `NestoraApp/1.0 (${process.env.NOMINATIM_EMAIL})`
     }
   });
 
-  // Nominatim returns an ARRAY, not "results"
   if (!response.data || response.data.length === 0) {
     throw new Error("Invalid address. Cannot find coordinates.");
   }

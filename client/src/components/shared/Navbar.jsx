@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react"; // Menu icons
+import { Menu, X } from "lucide-react"; 
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
-    <nav className="flex justify-between items-center h-20 relative z-50">
+    <nav className="flex justify-between items-center h-20 relative z-50 max-w-2xl md:max-w-5xl lg:max-w-7xl ml-auto mr-auto pl-5 pr-5">
       <div>
         <a
           href="/"
@@ -32,7 +33,7 @@ const Navbar = () => {
         <Button className="bg-yellow-400/40 hover:bg-yellow-300 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300">
           Log In
         </Button>
-        <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300">
+        <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300" onClick={() => navigate("/signup")}>
           Sign Up
         </Button>
       </div>

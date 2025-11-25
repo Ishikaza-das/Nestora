@@ -1,16 +1,17 @@
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import Navbar from "@/shared/Navbar";
-import Footer from "@/shared/Footer";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 export default function ThumbnailPage() {
   return (
-    <div className="w-full">
-      <Navbar/>
+    <>
+    <Navbar/>
+    <div className="max-w-2xl md:max-w-5xl lg:max-w-7xl ml-auto mr-auto pl-5 pr-5">
       <Carousel
         className="w-full"
         plugins={[
@@ -61,15 +62,12 @@ export default function ThumbnailPage() {
           <img src="/thumbnail.jpg" className="w-full h-60 object-fill"/>
         </div>
       </div>
-
       <div className="flex mt-6 justify-center">
         <Input type="text" className="md:w-96 rounded-tr-none rounded-br-none" placeholder="Search Your Place"/>
         <Button className="bg-yellow-400 rounded-tl-none rounded-bl-none hover:bg-yellow-500"><Search/></Button>
       </div>
-
-      <div className="mt-6">
-      <Footer/>
-      </div>
     </div>
+      <Footer/>
+    </>
   );
 }

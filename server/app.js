@@ -10,11 +10,11 @@ const propertyListingRoutes = require("./routes/propertyListing.route");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     origin: process.env.FRONTEND,
     credentials: true,
 }))
-app.use(cookieParser());
 
 app.use("/nest/v1/auth",authRoutes);
 app.use("/nest/v1/user",userRoutes);

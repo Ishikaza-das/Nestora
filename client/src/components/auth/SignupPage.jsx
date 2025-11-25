@@ -11,7 +11,9 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"
+ 
 const SignupPage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [input, setInput] = useState({
@@ -22,6 +24,7 @@ const SignupPage = () => {
     file: "",
   });
   const [loading, setLoading] = useState(false);
+  const naviagte = useNavigate();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -59,9 +62,11 @@ const SignupPage = () => {
       );
       if (response.data.success) {
         toast.success(response.data.message);
+        naviagte("/login");
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -172,9 +177,9 @@ const SignupPage = () => {
 
           <p className="text-center text-sm mt-2">
             Already have an account?{" "}
-            <span className="text-yellow-600 font-medium cursor-pointer hover:underline">
-              Log in
-            </span>
+            <Link to="/login" className="text-yellow-600 font-medium cursor-pointer hover:underline">
+              Log in 
+            </Link>
           </p>
         </CardContent>
       </Card>

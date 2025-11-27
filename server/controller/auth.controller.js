@@ -149,7 +149,7 @@ const forgetPassword = async (req, res) => {
 };
 
 const sendResetPasswordEmail = async (name, email, token) => {
-  const resetLink = `http://localhost:5000/reset-password/${token}`;
+  const resetLink = `${process.env.FRONTEND}/reset-password/${token}`;
   transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,

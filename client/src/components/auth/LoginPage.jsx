@@ -83,7 +83,7 @@ const LoginPage = () => {
             </div>
 
             <div className='mt-4 mb-2'>
-                <Link className="text-yellow-600 font-medium cursor-pointer hover:underline">Forgot Password</Link>
+                <Link to="/forgot-password" className="text-yellow-600 font-medium cursor-pointer hover:underline">Forgot Password</Link>
             </div>
 
             {loading ? (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react"; 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,28 +9,23 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center h-20 relative z-50 max-w-2xl md:max-w-5xl lg:max-w-7xl ml-auto mr-auto pl-5 pr-5">
       <div>
-        <a
-          href="/"
-          className="font-bold text-2xl text-gray-900 hover:text-yellow-500 transition-all duration-300"
-        >
-          Nestora
-        </a>
+          <h1 className="font-bold text-2xl text-gray-900 hover:text-yellow-500 transition-all duration-300">Nestora</h1>
       </div>
 
       <ul className="hidden md:flex gap-6 text-gray-700 font-medium">
-        <li className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
+        <Link to="/home" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           Home
-        </li>
-        <li className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
+        </Link>
+        <Link to="" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           About
-        </li>
-        <li className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
+        </Link>
+        <Link to="" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           Contact
-        </li>
+        </Link>
       </ul>
 
       <div className="hidden md:flex items-center gap-4">
-        <Button className="bg-yellow-400/40 hover:bg-yellow-300 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300">
+        <Button className="bg-yellow-400/40 hover:bg-yellow-300 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300"onClick={() => navigate("/login")}>
           Log In
         </Button>
         <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-none hover:scale-105 transition-transform duration-300" onClick={() => navigate("/signup")}>
@@ -70,10 +65,10 @@ const Navbar = () => {
           Contact
         </li>
         <div className="flex flex-col gap-4 mt-4">
-          <Button className="bg-yellow-400/40 hover:bg-yellow-300 text-black rounded-none">
+          <Button className="bg-yellow-400/40 hover:bg-yellow-300 text-black rounded-none" onClick={() => navigate("/login")}>
             Log In
           </Button>
-          <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-none">
+          <Button className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-none" onClick={() => navigate("/signup")}>
             Sign Up
           </Button>
         </div>

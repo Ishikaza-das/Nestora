@@ -4,28 +4,54 @@ import SignupPage from "./components/auth/SignupPage"
 import LoginPage from "./components/auth/LoginPage"
 import ForgotPassword from "./components/auth/ForgotPassword"
 import ResetPassword from "./components/auth/ResetPassword"
+import HomePage from "./components/pages/HomePage"
+import UserRedirectRoutes from "./components/routes/UserRedirectRoutes"
 
 function App() {
   const appRouter = createBrowserRouter([
     {
       path:"/",
-      element:<ThumbnailPage/>
+      element:(
+        <UserRedirectRoutes>
+          <ThumbnailPage/>
+        </UserRedirectRoutes>
+    )
     },
     {
       path:"/signup",
-      element:<SignupPage/>
+      element:(
+        <UserRedirectRoutes>
+          <SignupPage/>
+        </UserRedirectRoutes>
+      )
     },
     {
       path:"/login",
-      element:<LoginPage/>
+      element:(
+        <UserRedirectRoutes>
+          <LoginPage/>
+        </UserRedirectRoutes>
+      )
     },
     {
       path:"/forgot-password",
-      element:<ForgotPassword/>
+      element:(
+        <UserRedirectRoutes>
+          <ForgotPassword/>
+        </UserRedirectRoutes>
+      )
     },
     {
       path:"/reset-password/:token",
-      element: <ResetPassword/>
+      element:(
+        <UserRedirectRoutes>
+          <ResetPassword/>
+        </UserRedirectRoutes>
+      ) 
+    },
+    {
+      path:"/home",
+      element: <HomePage/>
     }
   ])
   return (

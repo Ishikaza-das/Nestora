@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Label } from '../ui/label'
 import axios from 'axios'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import { UserContext } from '@/context/UserContext'
 
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
@@ -14,6 +15,8 @@ const LoginPage = () => {
         email:"",
         password:""
     })
+    const navigate = useNavigate();
+    const {setUser} = useContext(UserContext)
 
     const handleInputChange = (e) => {
         setInput({...input,[e.target.id]: e.target.value});
@@ -29,10 +32,14 @@ const LoginPage = () => {
             const response = await axios.post(`${import.meta.env.VITE_AUTH_API}/login`,formData,{
                 headers:{
                     "Content-Type":"application/json"
-                }
+                },
+                withCredentials: true
             });
             if(response.data.success){
+                setUser(response.data.user);
+                console.log("After Login",response.data.user)
                 toast.success(response.data.message);
+                navigate("/home");
             }
         } catch (error) {
             console.error(error);

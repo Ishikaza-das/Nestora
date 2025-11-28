@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,8 +13,10 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"
+import { UserContext } from "@/context/UserContext";
  
 const SignupPage = () => {
+  const {user} = useContext(UserContext);
   const [imagePreview, setImagePreview] = useState(null);
   const [input, setInput] = useState({
     name: "",

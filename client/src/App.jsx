@@ -6,6 +6,7 @@ import ForgotPassword from "./components/auth/ForgotPassword"
 import ResetPassword from "./components/auth/ResetPassword"
 import HomePage from "./components/pages/HomePage"
 import UserRedirectRoutes from "./components/routes/UserRedirectRoutes"
+import ProfilePage from "./components/pages/ProfilePage"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -52,6 +53,10 @@ function App() {
     {
       path:"/home",
       element: <HomePage/>
+    },
+    {
+      path:"/profile",
+      element:<ProfilePage/>
     }
   ])
   return (

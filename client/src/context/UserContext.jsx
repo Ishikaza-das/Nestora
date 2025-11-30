@@ -1,11 +1,25 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const logout = async () => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_AUTH_API}/logout`,{withCredentials:true});
+            if(response.data.success){
+                setUser(null);
+                toast.success(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
+    };
 
     useEffect(() => {
         const checkUser = async () => {
@@ -26,7 +40,7 @@ export const UserProvider = ({ children }) => {
     },[])
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, setUser, logout}}>
             {children}
         </UserContext.Provider>
     )

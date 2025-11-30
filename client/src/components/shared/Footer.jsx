@@ -5,7 +5,6 @@ const Footer = () => {
   return (
     <footer className="w-full bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Brand */}
         <div>
           <h2 className="text-2xl font-bold text-white mb-3">Nestora</h2>
           <p className="text-sm leading-relaxed">
@@ -13,7 +12,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
@@ -23,7 +21,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* For Users */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">For Users</h3>
           <ul className="space-y-2 text-sm">
@@ -33,7 +30,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Socials */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
           <div className="flex space-x-4">
@@ -45,7 +41,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-gray-700 mt-6">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Nestora. All rights reserved.</p>

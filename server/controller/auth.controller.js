@@ -89,6 +89,7 @@ const login = async (req, res) => {
       name: user.name,
       email: user.email,
       profilePic: user.profilePic,
+      phone: user.phone
     };
     return res.status(200).json({
       message: `Welcome back ${user.name}`,

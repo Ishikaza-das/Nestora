@@ -15,7 +15,7 @@ const ProfilePage = () => {
         <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 md:p-8 flex justify-between">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
             <Avatar className="h-28 w-28 md:h-32 md:w-32 shadow-md">
-              <AvatarImage src={user?.profilePic} />
+              <AvatarImage src={user?.profilePic || "https://github.com/shadcn.png"} />
             </Avatar>
             <div className="flex flex-col items-center md:items-start gap-2">
               <h1 className="text-2xl font-semibold text-gray-800">{user?.name}</h1>

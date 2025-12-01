@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider} from "react-router-dom"
-import ThumbnailPage from "./pages/ThumbnailPage"
-import SignupPage from "./auth/SignupPage"
-import LoginPage from "./auth/LoginPage"
-import ForgotPassword from "./auth/ForgotPassword"
-import ResetPassword from "./auth/ResetPassword"
-import HomePage from "./pages/HomePage"
-import UserRedirectRoutes from "./routes/UserRedirectRoutes"
-import ProfilePage from "./pages/ProfilePage"
+import ThumbnailPage from "./components/pages/ThumbnailPage"
+import SignupPage from "./components/auth/SignupPage"
+import LoginPage from "./components/auth/LoginPage"
+import ForgotPassword from "./components/auth/ForgotPassword"
+import ResetPassword from "./components/auth/ResetPassword"
+import HomePage from "./components/pages/HomePage"
+import UserRedirectRoutes from "./components/routes/UserRedirectRoutes"
+import ProfilePage from "./components/pages/ProfilePage"
 
 function App() {
   const appRouter = createBrowserRouter([

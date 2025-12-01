@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
-import Navbar from "../components/shared/Navbar";
-import { Avatar, AvatarImage } from "../components/ui/avatar";
+import React, { useContext, useState } from "react";
+import Navbar from "../shared/Navbar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { UserContext } from "@/context/UserContext";
-import { Button } from "../components/ui/button";
+import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
+import UpdateOption from "./components/UpdateOption";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -23,9 +25,10 @@ const ProfilePage = () => {
               <p className="text-gray-600 text-sm">PhoneNumber : {user?.phone}</p>
             </div>
           </div>
-          <Button className="bg-yellow-300 text-black hover:bg-yellow-400"><Edit/></Button>
+          <Button className="bg-yellow-300 text-black hover:bg-yellow-400" onClick={() => setIsOpen(true)}><Edit/></Button>
         </div>
       </div>
+      <UpdateOption open={isOpen} setOpen={setIsOpen}/>
     </>
   );
 };

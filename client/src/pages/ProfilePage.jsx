@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Navbar from "../shared/Navbar";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import Navbar from "../components/shared/Navbar";
+import { Avatar, AvatarImage } from "../components/ui/avatar";
 import { UserContext } from "@/context/UserContext";
-import { Button } from "../ui/button";
+import { Button } from "../components/ui/button";
 import { Edit } from "lucide-react";
 
 const ProfilePage = () => {
@@ -20,7 +20,7 @@ const ProfilePage = () => {
             <div className="flex flex-col items-center md:items-start gap-2">
               <h1 className="text-2xl font-semibold text-gray-800">{user?.name}</h1>
               <p className="text-gray-600 text-sm">{user?.email}</p>
-              <p className="text-gray-600 text-sm">{user?.phone}</p>
+              <p className="text-gray-600 text-sm">PhoneNumber : {user?.phone}</p>
             </div>
           </div>
           <Button className="bg-yellow-300 text-black hover:bg-yellow-400"><Edit/></Button>

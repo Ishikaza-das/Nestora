@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { UserContext } from "@/context/UserContext";
 import { useNavigate } from "react-router-dom";
+import ChangeProfilePhoto from "./ChangeProfilePhoto";
 
 const UpdateOption = ({ open, setOpen }) => {
   const { setUser } = useContext(UserContext);
@@ -52,6 +53,17 @@ const UpdateOption = ({ open, setOpen }) => {
           </Button>
 
           <Button
+            onClick={() => {
+              setActiveDialog("changeProfileImage");
+              setOpen(false);
+            }}
+            variant="outline"
+            className="bg-amber-400 hover:bg-amber-500 cursor-pointer"
+          >
+            Change Profile Image
+          </Button>
+
+          <Button
             onClick={handelDelete}
             variant="outline"
             className="bg-red-500 hover:bg-red-600 cursor-pointer text-white"
@@ -80,6 +92,17 @@ const UpdateOption = ({ open, setOpen }) => {
       >
         <DialogContent>
           <ChangePassword />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={activeDialog === "changeProfileImage"}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) setActiveDialog(null); 
+        }}
+      >
+        <DialogContent>
+          <ChangeProfilePhoto/>
         </DialogContent>
       </Dialog>
     </>

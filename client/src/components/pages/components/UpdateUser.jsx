@@ -51,21 +51,21 @@ const UpdateUser = () => {
       <h1 className='font-semibold text-xl'>Update User</h1>
       <form action="" className='mt-4 space-y-2' onSubmit={userUpdateHandler}>
         <div className="space-y-1">
-              <Label htmlFor="profile" className="text-sm font-medium">
+              <Label htmlFor="name" className="text-sm font-medium">
                 Name
               </Label>
               <Input id="name" type="text" value={input.name} onChange={handelInputChnage}/>
         </div>
 
         <div className="space-y-1">
-              <Label htmlFor="profile" className="text-sm font-medium">
+              <Label htmlFor="email" className="text-sm font-medium">
                 Email
               </Label>
               <Input id="email" type="email" value={input.email} onChange={handelInputChnage}/>
         </div>
 
         <div className="space-y-1">
-              <Label htmlFor="profile" className="text-sm font-medium">
+              <Label htmlFor="phone" className="text-sm font-medium">
                 Phone Number
               </Label>
               <Input id="phone" type="text" value={input.phone} onChange={handelInputChnage}/>

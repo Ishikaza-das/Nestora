@@ -2,9 +2,14 @@ import { Dialog, DialogContent } from '@/components/ui/dialog'
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import UpdateUser from './UpdateUser';
+import ChangePassword from './ChangePassword';
 
 const UpdateOption = ({ open, setOpen }) => {
   const [activeDialog, setActiveDialog] = useState(null);
+
+  const handelDelete = async () => {
+    
+  }
 
   return (
     <>
@@ -31,6 +36,17 @@ const UpdateOption = ({ open, setOpen }) => {
           >
             Change Password
           </Button>
+
+          <Button 
+            onClick={() => {
+              setActiveDialog("changePassword");
+              setOpen(false);
+            }}
+            variant="outline"
+            className="bg-red-500 hover:bg-red-600 cursor-pointer text-white"
+          >
+            Delete Account
+          </Button>
         </DialogContent>
       </Dialog>
 
@@ -42,7 +58,7 @@ const UpdateOption = ({ open, setOpen }) => {
 
       <Dialog open={activeDialog === "changePassword"} onOpenChange={() => setActiveDialog(null)}>
         <DialogContent>
-          Change Password
+          <ChangePassword/>
         </DialogContent>
       </Dialog>
     </>

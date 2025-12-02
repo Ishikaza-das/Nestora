@@ -1,21 +1,35 @@
-import { Dialog, DialogContent } from '@/components/ui/dialog'
-import React, { useState } from 'react'
-import { Button } from '@/components/ui/button';
-import UpdateUser from './UpdateUser';
-import ChangePassword from './ChangePassword';
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import React, { useContext, useState } from "react";
+import { Button } from "@/components/ui/button";
+import UpdateUser from "./UpdateUser";
+import ChangePassword from "./ChangePassword";
+import axios from "axios";
+import { toast } from "sonner";
+import { UserContext } from "@/context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const UpdateOption = ({ open, setOpen }) => {
+  const { setUser } = useContext(UserContext);
   const [activeDialog, setActiveDialog] = useState(null);
+  const navigate = useNavigate();
 
   const handelDelete = async () => {
-    
-  }
+    const response = await axios.delete(
+      `${import.meta.env.VITE_USER_API}/delete`,
+      { withCredentials: true }
+    );
+    if (response.data.success) {
+      toast.success(response.data.message);
+      setUser(null);
+      navigate("/");
+    }
+  };
 
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="flex flex-col gap-4">
-          <Button 
+          <Button
             onClick={() => {
               setActiveDialog("updateUser");
               setOpen(false);
@@ -26,7 +40,7 @@ const UpdateOption = ({ open, setOpen }) => {
             Update User
           </Button>
 
-          <Button 
+          <Button
             onClick={() => {
               setActiveDialog("changePassword");
               setOpen(false);
@@ -37,11 +51,8 @@ const UpdateOption = ({ open, setOpen }) => {
             Change Password
           </Button>
 
-          <Button 
-            onClick={() => {
-              setActiveDialog("changePassword");
-              setOpen(false);
-            }}
+          <Button
+            onClick={handelDelete}
             variant="outline"
             className="bg-red-500 hover:bg-red-600 cursor-pointer text-white"
           >
@@ -50,19 +61,29 @@ const UpdateOption = ({ open, setOpen }) => {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={activeDialog === "updateUser"} onOpenChange={() => setActiveDialog(null)}>
+      <Dialog
+        open={activeDialog === "updateUser"}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) setActiveDialog(null); 
+        }}
+      >
         <DialogContent>
-          <UpdateUser/>
+          <UpdateUser />
         </DialogContent>
       </Dialog>
 
-      <Dialog open={activeDialog === "changePassword"} onOpenChange={() => setActiveDialog(null)}>
+      <Dialog
+        open={activeDialog === "changePassword"}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) setActiveDialog(null); 
+        }}
+      >
         <DialogContent>
-          <ChangePassword/>
+          <ChangePassword />
         </DialogContent>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default UpdateOption
+export default UpdateOption;

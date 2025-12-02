@@ -47,7 +47,7 @@ const Navbar = () => {
       }
 
       <div className="md:hidden flex items-center">
-        <button onClick={() => setIsOpen(!isOpen)}>
+        <button  onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -93,7 +93,7 @@ const Navbar = () => {
         {
           user && (
             <>
-            <Button variant="link" onClick={handleLogout}>Logout</Button>
+            <button  variant="link" onClick={handleLogout}>Logout</button>
             </>
           )
         }

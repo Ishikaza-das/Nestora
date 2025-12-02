@@ -2,6 +2,8 @@ const User = require("../models/user.model");
 const Bcrypt = require("bcryptjs");
 const cloudinary = require("../utils/cloudinary");
 const getDataUri = require("../utils/datauri");
+const Property = require("../models/property.model");
+const Favorite = require("../models/favorite.model");
 
 const getCurrentUser = async (req, res) => {
   try {
@@ -160,6 +162,8 @@ const deleteAccount = async (req,res) => {
         success: false
       })
     }
+    await Property.deleteMany({landlordId: userId});
+    await Favorite.deleteMany({userId});
     await User.findByIdAndDelete(userId);
     return res.status(200).json({
       message:"Account deleted",

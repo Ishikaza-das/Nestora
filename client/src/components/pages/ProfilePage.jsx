@@ -3,7 +3,7 @@ import Navbar from "../shared/Navbar";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { UserContext } from "@/context/UserContext";
 import { Button } from "../ui/button";
-import { Edit } from "lucide-react";
+import { Settings } from "lucide-react";
 import UpdateOption from "./components/UpdateOption";
 
 const ProfilePage = () => {
@@ -25,7 +25,7 @@ const ProfilePage = () => {
               <p className="text-gray-600 text-sm">PhoneNumber : {user?.phone}</p>
             </div>
           </div>
-          <Button className="bg-yellow-300 text-black hover:bg-yellow-400" onClick={() => setIsOpen(true)}><Edit/></Button>
+          <Button className="bg-yellow-300 text-black hover:bg-yellow-400" onClick={() => setIsOpen(true)}><Settings/></Button>
         </div>
       </div>
       <UpdateOption open={isOpen} setOpen={setIsOpen}/>

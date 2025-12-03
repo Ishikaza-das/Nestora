@@ -3,17 +3,19 @@ import Navbar from "../shared/Navbar";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { UserContext } from "@/context/UserContext";
 import { Button } from "../ui/button";
-import { Settings } from "lucide-react";
+import { Plus, Settings } from "lucide-react";
 import UpdateOption from "./components/UpdateOption";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
+  const naviagte = useNavigate();
 
   return (
     <>
       <Navbar />
-      <div className="max-w-2xl md:max-w-5xl lg:max-w-7xl mx-auto px-4 py-10">
+      <div className="max-w-2xl md:max-w-5xl lg:max-w-7xl mx-auto px-4 py-4">
         <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 md:p-8 flex justify-between">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
             <Avatar className="h-28 w-28 md:h-32 md:w-32 shadow-md">
@@ -26,6 +28,9 @@ const ProfilePage = () => {
             </div>
           </div>
           <Button className="bg-yellow-300 text-black hover:bg-yellow-400" onClick={() => setIsOpen(true)}><Settings/></Button>
+        </div>
+        <div className="text-right my-4">
+          <Button className="bg-yellow-400 hover:bg-yellow-500 text-black cursor-pointer" onClick={() => naviagte("/app-property")}><Plus/>Add Property</Button>
         </div>
       </div>
       <UpdateOption open={isOpen} setOpen={setIsOpen}/>

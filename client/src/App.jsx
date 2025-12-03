@@ -7,6 +7,7 @@ import ResetPassword from "./components/auth/ResetPassword"
 import HomePage from "./components/pages/HomePage"
 import UserRedirectRoutes from "./components/routes/UserRedirectRoutes"
 import ProfilePage from "./components/pages/ProfilePage"
+import AddProperty from "./components/pages/AddProperty"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -57,6 +58,10 @@ function App() {
     {
       path:"/profile",
       element:<ProfilePage/>
+    },
+    {
+      path:"/app-property",
+      element:<AddProperty/>
     }
   ])
   return (

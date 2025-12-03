@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center h-20 relative z-50 max-w-2xl md:max-w-5xl lg:max-w-7xl ml-auto mr-auto pl-5 pr-5">
       <div>
-          <h1 className="font-bold text-2xl text-gray-900 hover:text-yellow-500 transition-all duration-300">Nestora</h1>
+          <Link to="/" className="font-bold text-2xl text-gray-900 hover:text-yellow-500 transition-all duration-300">Nestora</Link>
       </div>
 
       <ul className="hidden md:flex gap-6 text-gray-700 font-medium">

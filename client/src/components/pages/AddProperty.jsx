@@ -14,54 +14,62 @@ import { Loader2 } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const AddProperty = () => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState({
-    title:"",
-    description:"",
-    price:"",
-    location:"",
-    bedrooms:"",
-    bathrooms:"",
-    amenities:"",
-    propertyType:""
-  })
+    title: "",
+    description: "",
+    price: "",
+    location: "",
+    bedrooms: "",
+    bathrooms: "",
+    amenities: "",
+    propertyType: "",
+  });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    setInput({...input,[e.target.id]: e.target.value});
-  }
+    setInput({ ...input, [e.target.id]: e.target.value });
+  };
 
   const handelAddProperty = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("title",input.title)
-    formData.append("description",input.description)
-    formData.append("price",input.price)
-    formData.append("location",input.location)
-    formData.append("bedrooms",input.bedrooms)
-    formData.append("bathrooms",input.bathrooms)
-    formData.append("amenities",input.amenities)
-    formData.append("propertyType",input.propertyType)
+    formData.append("title", input.title);
+    formData.append("description", input.description);
+    formData.append("price", input.price);
+    formData.append("location", input.location);
+    formData.append("bedrooms", input.bedrooms);
+    formData.append("bathrooms", input.bathrooms);
+    formData.append("amenities", input.amenities);
+    formData.append("propertyType", input.propertyType);
 
     try {
-      setLoading(true)
-      const response = await axios.post(`${import.meta.env.VITE_PROPERTY_API}/add-property`,formData,{
-        headers:{
-          "Content-Type":"application/json"
-        },
-        withCredentials: true
-      })
-      if(response.data.success){
+      setLoading(true);
+      const response = await axios.post(
+        `${import.meta.env.VITE_PROPERTY_API}/add-property`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if (response.data.success) {
         toast.success(response.data.message);
+        const propertyId = response.data.property._id;
+        navigate(`/${propertyId}/images`);
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div>

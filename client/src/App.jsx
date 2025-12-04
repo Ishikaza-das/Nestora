@@ -8,6 +8,7 @@ import HomePage from "./components/pages/HomePage"
 import UserRedirectRoutes from "./components/routes/UserRedirectRoutes"
 import ProfilePage from "./components/pages/ProfilePage"
 import AddProperty from "./components/pages/AddProperty"
+import UploadImages from "./components/pages/UploadImages"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -62,6 +63,10 @@ function App() {
     {
       path:"/app-property",
       element:<AddProperty/>
+    },
+    {
+      path:"/:id/images",
+      element:<UploadImages/>
     }
   ])
   return (

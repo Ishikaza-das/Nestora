@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { Label } from '../ui/label'
@@ -7,13 +7,16 @@ import { Button } from '../ui/button'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { PropertyContext } from '@/context/PropertyContext'
 
 const UploadImages = () => {
+  const { refreshProperty } = useContext(PropertyContext);
   const [loading, setLoading] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const params = useParams();
   const propertyId = params.id;
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -51,6 +54,8 @@ const UploadImages = () => {
      })
      if(response.data.success){
       toast.success(response.data.message);
+      await refreshProperty();
+      navigate("/profile");
      }
     } catch (error) {
       console.log(error);

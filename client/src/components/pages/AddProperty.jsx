@@ -54,9 +54,7 @@ const AddProperty = () => {
         `${import.meta.env.VITE_PROPERTY_API}/add-property`,
         formData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );

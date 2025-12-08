@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../shared/Navbar";
 import {
   Card,
@@ -15,8 +15,10 @@ import { Textarea } from "../ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { PropertyContext } from "@/context/PropertyContext";
 
 const AddProperty = () => {
+  const {refreshProperty} = useContext(PropertyContext)
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState({
     title: "",
@@ -52,14 +54,13 @@ const AddProperty = () => {
         `${import.meta.env.VITE_PROPERTY_API}/add-property`,
         formData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
       if (response.data.success) {
         toast.success(response.data.message);
+        await refreshProperty();
         const propertyId = response.data.property._id;
         navigate(`/${propertyId}/images`);
       }

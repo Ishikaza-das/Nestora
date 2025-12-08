@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Plus, Settings } from "lucide-react";
 import UpdateOption from "./components/UpdateOption";
 import { useNavigate } from "react-router-dom";
+import UserPropertyTable from "./components/UserPropertyTable";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);
@@ -32,6 +33,10 @@ const ProfilePage = () => {
         <div className="text-right my-4">
           <Button className="bg-yellow-400 hover:bg-yellow-500 text-black cursor-pointer" onClick={() => naviagte("/app-property")}><Plus/>Add Property</Button>
         </div>
+      </div>
+      <div className="max-w-2xl md:max-w-5xl lg:max-w-7xl mx-auto px-4 py-4">
+        <h1 className="font-bold text-lg my-5">Created Property</h1>
+        <UserPropertyTable/>
       </div>
       <UpdateOption open={isOpen} setOpen={setIsOpen}/>
     </>

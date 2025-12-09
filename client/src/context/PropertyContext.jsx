@@ -40,7 +40,7 @@ export const PropertyProvider = ({ children }) => {
     }
 
   return (
-    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty}}>
+    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty, setSingleProperty}}>
       {children}
     </PropertyContext.Provider>
   )

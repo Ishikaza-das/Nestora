@@ -4,11 +4,12 @@ import PropertyImageDispaly from "./components/PropertyImageDispaly";
 import { useParams } from "react-router-dom";
 import { PropertyContext } from "@/context/PropertyContext";
 import PropertyDescription from "./components/PropertyDescription";
+import MapComponent from "./components/MapComponent";
 
 const PropertyView = () => {
   const params = useParams();
   const propertyId = params.id;
-  const { fetchSingleProperty } = useContext(PropertyContext);
+  const { fetchSingleProperty, singleProperty } = useContext(PropertyContext);
 
   useEffect(() => {
     fetchSingleProperty(propertyId);
@@ -26,12 +27,18 @@ const PropertyView = () => {
           </div>
 
           <div className="w-full h-[400px] bg-white shadow rounded-xl overflow-hidden">
-            <iframe
-              title="Map"
-              className="w-full h-full"
-              src="https://maps.google.com/maps?q=india&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            ></iframe>
-          </div>
+  {singleProperty?.latitude && singleProperty?.longitude ? (
+    <MapComponent
+      lat={singleProperty.latitude}
+      lng={singleProperty.longitude}
+      title={singleProperty.title}
+    />
+  ) : (
+    <div className="flex items-center justify-center h-full text-gray-500">
+      Loading map...
+    </div>
+  )}
+</div>
         </div>
       </div>
     </div>

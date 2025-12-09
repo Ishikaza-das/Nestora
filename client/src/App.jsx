@@ -11,6 +11,7 @@ import AddProperty from "./components/pages/AddProperty"
 import UploadImages from "./components/pages/UploadImages"
 import PropertyView from "./components/pages/PropertyView"
 import "./utils/LeafletFix"
+import About from "./components/pages/About"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -57,6 +58,10 @@ function App() {
     {
       path:"/home",
       element: <HomePage/>
+    },
+    {
+      path:"/about",
+      element:<About/>
     },
     {
       path:"/profile",

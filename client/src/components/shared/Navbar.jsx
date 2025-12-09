@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to="/home" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           Home
         </Link>
-        <Link to="" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
+        <Link to="/about" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           About
         </Link>
         <Link to="" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
@@ -72,18 +72,18 @@ const Navbar = () => {
             </>
           )
         }
-        <li
+        <Link to="/home"
           className="hover:text-yellow-500 transition-all duration-300 cursor-pointer"
           onClick={() => setIsOpen(false)}
         >
           Home
-        </li>
-        <li
+        </Link>
+        <Link to="/about"
           className="hover:text-yellow-500 transition-all duration-300 cursor-pointer"
           onClick={() => setIsOpen(false)}
         >
           About
-        </li>
+        </Link>
         <li
           className="hover:text-yellow-500 transition-all duration-300 cursor-pointer"
           onClick={() => setIsOpen(false)}

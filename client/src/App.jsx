@@ -10,6 +10,7 @@ import ProfilePage from "./components/pages/ProfilePage"
 import AddProperty from "./components/pages/AddProperty"
 import UploadImages from "./components/pages/UploadImages"
 import PropertyView from "./components/pages/PropertyView"
+import "./utils/LeafletFix"
 
 function App() {
   const appRouter = createBrowserRouter([

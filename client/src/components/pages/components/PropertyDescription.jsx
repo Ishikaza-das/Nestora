@@ -49,10 +49,10 @@ const PropertyDescription = () => {
         </p>
 
         <hr className="my-4" />
-        <div className="flex justify-between">
+        <div className="space-y-4 md:flex md:justify-between">
           <p className="text-gray-600 leading-relaxed">
           {singleProperty?.description}
-        </p>
+          </p>
         <Button className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer">Chat with Owner</Button>
         </div>
       </div>

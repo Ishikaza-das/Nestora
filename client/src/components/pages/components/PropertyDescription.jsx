@@ -1,11 +1,17 @@
+import { Button } from "@/components/ui/button";
 import { PropertyContext } from "@/context/PropertyContext";
-import { BedIcon, ToiletIcon } from "lucide-react";
-import React, { useContext } from "react";
+import { UserContext } from "@/context/UserContext";
+import { BedIcon, Pen, ToiletIcon } from "lucide-react";
+import React, { useContext, useState } from "react";
+import UpdateProperty from "./UpdateProperty";
 
 const PropertyDescription = () => {
   const { singleProperty } = useContext(PropertyContext);
+  const { user } = useContext(UserContext);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="bg-white shadow p-6 rounded-xl">
+    <div className="bg-white shadow p-6 rounded-xl flex justify-between">
       <div className="space-y-3 text-gray-700">
         <p className="font-semibold text-xl">{singleProperty?.title}</p>
         <p>
@@ -43,11 +49,19 @@ const PropertyDescription = () => {
         </p>
 
         <hr className="my-4" />
-
-        <p className="text-gray-600 leading-relaxed">
+        <div className="flex justify-between">
+          <p className="text-gray-600 leading-relaxed">
           {singleProperty?.description}
         </p>
+        <Button className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer">Chat with Owner</Button>
+        </div>
       </div>
+      {
+        user?._id === singleProperty?.landlordId && (
+            <Button className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer" onClick={() => setIsOpen(true)}><Pen/></Button>
+        )
+      }
+      <UpdateProperty open={isOpen} setOpen={setIsOpen}/>
     </div>
   );
 };

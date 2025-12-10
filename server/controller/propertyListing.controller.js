@@ -15,27 +15,33 @@ const allProperties = async (req,res) => {
     }
 }
 
-const getSingleProperty = async (req,res) => {
-    try {
-        const propertyId = req.params.id;
-        const property = await Property.findById(propertyId);
-        if(!property){
-            return res.status(400).json({
-                message:"Property not found",
-                success: false
-            })
-        }
-        return res.status(200).json({
-            property,
-            success: true
-        })
-    } catch (error) {
-        return res.status(400).json({
-            message: error.message,
-            success: false
-        })
+const getSingleProperty = async (req, res) => {
+  try {
+    const propertyId = req.params.id;
+
+    const property = await Property.findById(propertyId)
+      .populate("landlordId", "name phone _id");
+
+    if (!property) {
+      return res.status(400).json({
+        message: "Property not found",
+        success: false
+      });
     }
-}
+
+    return res.status(200).json({
+      property,
+      success: true
+    });
+
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      success: false
+    });
+  }
+};
+
 
 const searchProperties = async (req, res) => {
   try {

@@ -27,7 +27,7 @@ const getUserConversations = async (req, res) => {
 
     const conversations = await Conversation.find({
       participants: userId,
-    }).populate("participants", "name email");
+    }).populate("participants", "name email profilePic");
 
     return res.json({ success: true, conversations });
   } catch (err) {

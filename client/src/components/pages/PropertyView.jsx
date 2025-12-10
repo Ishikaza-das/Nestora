@@ -27,18 +27,19 @@ const PropertyView = () => {
           </div>
 
           <div className="w-full h-[400px] bg-white shadow rounded-xl overflow-hidden">
-  {singleProperty?.latitude && singleProperty?.longitude ? (
-    <MapComponent
-      lat={singleProperty.latitude}
-      lng={singleProperty.longitude}
-      title={singleProperty.title}
-    />
-  ) : (
-    <div className="flex items-center justify-center h-full text-gray-500">
-      Loading map...
-    </div>
-  )}
-</div>
+            {singleProperty?.latitude && singleProperty?.longitude ? (
+              <MapComponent
+                key={singleProperty._id}
+                lat={singleProperty.latitude}
+                lng={singleProperty.longitude}
+                title={singleProperty.title}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full text-gray-500">
+                Loading map...
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

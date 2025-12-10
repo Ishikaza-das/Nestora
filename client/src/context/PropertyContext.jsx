@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { UserContext } from './UserContext';
 
 export const PropertyContext = createContext();
 
 export const PropertyProvider = ({ children }) => {
+    const {user, loading} = useContext(UserContext);
     const [userProperty, setUserProperty] = useState([]);
     const [singleProperty, setSingleProperty] = useState(null);
     const [allProperty, setAllProperty] = useState([]);
@@ -22,8 +24,10 @@ export const PropertyProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        fetchProperty();
-    },[]);
+        if (!loading && user?._id) {
+            fetchProperty();
+        }
+    }, [loading, user]);
 
     const refreshProperty = async () => {
         await fetchProperty();

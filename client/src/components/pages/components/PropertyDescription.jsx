@@ -7,17 +7,20 @@ import UpdateProperty from "./UpdateProperty";
 import { useNavigate } from "react-router-dom";
 
 const PropertyDescription = () => {
-  const { singleProperty } = useContext(PropertyContext);
+    const { singleProperty } = useContext(PropertyContext);
   const { user } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  const landlordId = singleProperty?.landlordId?._id;
+  const isOwner = user?._id === landlordId;  
+
   const handleChat = () => {
-    if (!singleProperty?.landlordId?._id) return;
+    if (!landlordId) return;
 
     navigate("/chat", {
       state: {
-        ownerId: singleProperty.landlordId._id,
+        ownerId: landlordId,
         ownerName: singleProperty.landlordId.name,
       },
     });
@@ -78,7 +81,7 @@ const PropertyDescription = () => {
           <p className="text-gray-600 leading-relaxed">
             {singleProperty?.description}
           </p>
-          {user?._id != singleProperty?.landlordId?._id && (
+          {!isOwner && (
             <Button
               className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
               onClick={handleChat}
@@ -88,7 +91,7 @@ const PropertyDescription = () => {
           )}
         </div>
       </div>
-      {user?._id === singleProperty?.landlordId?._id && (
+      {isOwner && (
         <Button
           className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
           onClick={() => setIsOpen(true)}

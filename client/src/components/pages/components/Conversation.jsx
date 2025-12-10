@@ -71,7 +71,8 @@ const Conversation = ({ chat, isMobile, setActiveChat }) => {
         )}
 
         <p className="font-semibold text-gray-700 text-lg">
-          {chat?.participants?.find((p) => p._id !== user._id)?.name || "User"}
+          {chat?.participants?.find((p) => p._id !== user._id)?.name ||
+            "User"}
         </p>
       </div>
 

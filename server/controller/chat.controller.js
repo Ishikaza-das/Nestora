@@ -27,13 +27,17 @@ const getUserConversations = async (req, res) => {
 
     const conversations = await Conversation.find({
       participants: userId,
-    }).populate("participants", "name email profilePic");
+    })
+      .where("participants")
+      .size(2) 
+      .populate("participants", "name email profilePic");
 
     return res.json({ success: true, conversations });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
   }
 };
+
 
 const getMessages = async (req, res) => {
   try {

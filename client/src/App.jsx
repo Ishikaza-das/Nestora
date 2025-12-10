@@ -12,6 +12,7 @@ import UploadImages from "./components/pages/UploadImages"
 import PropertyView from "./components/pages/PropertyView"
 import "./utils/LeafletFix"
 import About from "./components/pages/About"
+import ProtectedRoutes from "./components/routes/ProtectedRoutes"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -65,15 +66,27 @@ function App() {
     },
     {
       path:"/profile",
-      element:<ProfilePage/>
+      element:(
+        <ProtectedRoutes>
+          <ProfilePage/>
+        </ProtectedRoutes>
+      )
     },
     {
       path:"/app-property",
-      element:<AddProperty/>
+      element:(
+        <ProtectedRoutes>
+          <AddProperty/>
+        </ProtectedRoutes>
+      )
     },
     {
       path:"/:id/images",
-      element:<UploadImages/>
+      element:(
+        <ProtectedRoutes>
+        <UploadImages/>
+        </ProtectedRoutes>
+      )
     },
     {
       path:"/propertyview/:id",

@@ -4,11 +4,24 @@ import { UserContext } from "@/context/UserContext";
 import { BedIcon, Pen, ToiletIcon } from "lucide-react";
 import React, { useContext, useState } from "react";
 import UpdateProperty from "./UpdateProperty";
+import { useNavigate } from "react-router-dom";
 
 const PropertyDescription = () => {
   const { singleProperty } = useContext(PropertyContext);
   const { user } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChat = () => {
+    if (!singleProperty?.landlordId?._id) return;
+
+    navigate("/chat", {
+      state: {
+        ownerId: singleProperty.landlordId._id,
+        ownerName: singleProperty.landlordId.name,
+      },
+    });
+  };
 
   return (
     <div className="bg-white shadow p-6 rounded-xl flex justify-between">
@@ -51,21 +64,39 @@ const PropertyDescription = () => {
           <span className="font-semibold">Status:</span>{" "}
           {singleProperty?.status.toUpperCase()}
         </p>
+        <p>
+          <span className="font-semibold">Owner:</span>{" "}
+          {singleProperty?.landlordId?.name}
+        </p>
+        <p>
+          <span className="font-semibold">Phone Number:</span>{" "}
+          {singleProperty?.landlordId?.phone}
+        </p>
 
         <hr className="my-4" />
         <div className="space-y-4 md:flex md:justify-between">
           <p className="text-gray-600 leading-relaxed">
-          {singleProperty?.description}
+            {singleProperty?.description}
           </p>
-        <Button className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer">Chat with Owner</Button>
+          {user?._id != singleProperty?.landlordId?._id && (
+            <Button
+              className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
+              onClick={handleChat}
+            >
+              Chat with Owner
+            </Button>
+          )}
         </div>
       </div>
-      {
-        user?._id === singleProperty?.landlordId && (
-            <Button className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer" onClick={() => setIsOpen(true)}><Pen/></Button>
-        )
-      }
-      <UpdateProperty open={isOpen} setOpen={setIsOpen}/>
+      {user?._id === singleProperty?.landlordId?._id && (
+        <Button
+          className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        >
+          <Pen />
+        </Button>
+      )}
+      <UpdateProperty open={isOpen} setOpen={setIsOpen} />
     </div>
   );
 };

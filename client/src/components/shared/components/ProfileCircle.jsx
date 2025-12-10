@@ -29,6 +29,10 @@ const ProfileCircle = () => {
                     <Link to="/profile">View Profile</Link>
                 </Button>
 
+                 <Button variant="link">
+                    <Link to="/chat">Chat</Link>
+                </Button>
+
                 <Button variant="link" onClick={handleLogout}>
                     Logout
                 </Button>

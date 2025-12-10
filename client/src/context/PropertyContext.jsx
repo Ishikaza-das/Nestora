@@ -6,7 +6,7 @@ export const PropertyContext = createContext();
 export const PropertyProvider = ({ children }) => {
     const [userProperty, setUserProperty] = useState([]);
     const [singleProperty, setSingleProperty] = useState(null);
-    const [allProperty, setAllProperty] = useState(null);
+    const [allProperty, setAllProperty] = useState([]);
 
     const fetchProperty = async () => {
         try {
@@ -52,7 +52,7 @@ export const PropertyProvider = ({ children }) => {
     }
 
   return (
-    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty, setSingleProperty, fetchAllProperty, allProperty}}>
+    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty, setSingleProperty, fetchAllProperty, allProperty, setAllProperty}}>
       {children}
     </PropertyContext.Provider>
   )

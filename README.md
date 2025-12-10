@@ -98,13 +98,14 @@ Backend (.env.demo)
 - MONGO_URI: MongoDB connection string
 - PORT: server port
 - JWT_SECRET: secret used for signing JWTs
-- FRONTEND_ORIGIN: URL of the frontend (CORS)
+- FRONTEND: URL of the frontend (CORS)
 - CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET: Cloudinary credentials
-- SOCKET_PATH or SOCKET_URL: optional socket endpoint or origin
+- GOOGLE_MAP_API_KEY: Your Google Map API
+- EMAIL_USER: your email
+- EMAIL_PASS: any password
 
 Frontend (.env.demo)
-- VITE_API_BASE: Base API URL (e.g. http://localhost:5000/api)
-- VITE_SOCKET_URL: Socket server URL (e.g. http://localhost:5000)
+- VITE_AUTH_API, VITE_USER_API, VITE_PROPERTY_API, VITE_PROPERTY_LISTING_API, VITE_CHAT_API, BACKEND 
 
 Security note
 

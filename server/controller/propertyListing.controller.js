@@ -37,52 +37,71 @@ const getSingleProperty = async (req,res) => {
     }
 }
 
-const searchProperties = async (req,res) => {
-    try {
-        const {location, minPrice, maxPrice, bedrooms, bathrooms, propertyType, amenities, sortBy, order } = req.query;
-        let filter = {};
+const searchProperties = async (req, res) => {
+  try {
+    const {
+      location, minPrice, maxPrice,
+      bedrooms, bathrooms,
+      sortBy, order,
+      keyword
+    } = req.query;
 
-        if(location){
-            filter.location = {$regex: location, $options: "i"}
-        }
-        if(minPrice || maxPrice){
-            filter.price = {};
-            if(minPrice) filter.price.$gte = Number(minPrice);
-            if(maxPrice) filter.price.$lte = Number(maxPrice);
-        }
-        if(bedrooms){
-            filter.bedrooms = Number(bedrooms);
-        }
-        if(bathrooms){
-            filter.bathrooms = Number(bathrooms);
-        }
-        if(propertyType){
-            filter.propertyType = propertyType;
-        }
-        if(amenities){
-            filter.amenities = {$all: amenities.split(",")};
-        }
-        filter.status = "available";
+    let filter = {};
 
-        let sortOptions = {};
-        if(sortBy){
-            sortOptions[sortBy] = order === "desc" ? -1:1;
-        }
+    if (keyword) {
+      filter.$or = [
+        { title: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { location: { $regex: keyword, $options: "i" } }
+      ];
 
-        const properties = await Property.find(filter).sort(sortOptions);
+      const bhkMatch = keyword.match(/(\d+)\s*bhk/i);
+      if (bhkMatch) {
+        filter.bedrooms = Number(bhkMatch[1]);
+      }
 
-        res.status(200).json({
-            message:`${properties.length} results found`,
-            properties,
-            success: true
-        })
-    } catch (error) {
-        return res.status(400).json({
-            message: error.message,
-            success: false
-        })
+      const types = ["apartment", "villa", "house", "studio"];
+      const foundType = types.find(t =>
+        keyword.toLowerCase().includes(t.toLowerCase())
+      );
+      if (foundType) {
+        filter.propertyType = new RegExp(foundType, "i");
+      }
     }
-}
+
+    if (location) {
+      filter.location = { $regex: location, $options: "i" };
+    }
+
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
+
+    if (bedrooms) filter.bedrooms = Number(bedrooms);
+    if (bathrooms) filter.bathrooms = Number(bathrooms);
+
+    filter.status = "available";
+
+    let sortOptions = {};
+    if (sortBy) sortOptions[sortBy] = order === "desc" ? -1 : 1;
+
+    const properties = await Property.find(filter).sort(sortOptions);
+
+    res.status(200).json({
+      message: `${properties.length} results found`,
+      properties,
+      success: true
+    });
+
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      success: false
+    });
+  }
+};
 
 const coordinatesMapProperty = async (req,res) =>{
     try {

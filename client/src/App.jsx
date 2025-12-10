@@ -13,6 +13,7 @@ import PropertyView from "./components/pages/PropertyView"
 import "./utils/LeafletFix"
 import About from "./components/pages/About"
 import ProtectedRoutes from "./components/routes/ProtectedRoutes"
+import Chat from "./components/pages/Chat"
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -91,6 +92,14 @@ function App() {
     {
       path:"/propertyview/:id",
       element:<PropertyView/>
+    },
+    {
+      path:"/chat",
+      element:(
+        <ProtectedRoutes>
+          <Chat/>
+        </ProtectedRoutes>
+      )
     }
   ])
   return (

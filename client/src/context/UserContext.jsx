@@ -1,3 +1,4 @@
+import { socket } from "@/utils/Socket";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -38,6 +39,12 @@ export const UserProvider = ({ children }) => {
         }
         checkUser();
     },[])
+
+    useEffect(() => {
+    if (user?._id) {
+        socket.emit("register_user", user._id);
+    }
+}, [user]);
 
     return (
         <UserContext.Provider value={{user, setUser, logout, loading}}>

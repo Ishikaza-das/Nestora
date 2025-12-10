@@ -4,8 +4,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+
 
 export default function ThumbnailPage() {
   return (
@@ -25,7 +24,6 @@ export default function ThumbnailPage() {
                   alt={`Apartment ${index + 1}`}
                   className="w-full h-72 md:h-96 object-cover rounded-xl"
                 />
-                {/* Overlay Text */}
                 <div className="absolute top-10 left-5 md:left-10 bg-black bg-opacity-40 p-4 rounded">
                   <h2 className="text-white text-xl md:text-3xl font-bold">
                     Find Your Dream Home

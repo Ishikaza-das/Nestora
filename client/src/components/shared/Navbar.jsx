@@ -66,6 +66,7 @@ const Navbar = () => {
               <h1>{user?.name}</h1>
             </div>
             <Link to="/profile">Profile</Link>
+            <Link to="/chat">Chat</Link>
             </>
           )
         }

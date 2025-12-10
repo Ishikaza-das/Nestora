@@ -105,7 +105,11 @@ Backend (.env.demo)
 - EMAIL_PASS: any password
 
 Frontend (.env.demo)
-- VITE_AUTH_API, VITE_USER_API, VITE_PROPERTY_API, VITE_PROPERTY_LISTING_API, VITE_CHAT_API, BACKEND 
+- VITE_AUTH_API, VITE_USER_API, VITE_PROPERTY_API, VITE_PROPERTY_LISTING_API, VITE_CHAT_API, BACKEND
+
+  Hosted URL
+- Fronted - https://nestora-frontend.onrender.com
+- Backend - https://nestora-backend-r69j.onrender.com
 
 Security note
 

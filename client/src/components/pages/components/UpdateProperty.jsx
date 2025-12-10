@@ -108,7 +108,7 @@ const UpdateProperty = ({ open, setOpen }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <Label htmlFor="price">Price (₹)/ month</Label>
+                <Label htmlFor="price">Price / month</Label>
                 <Input
                   id="price"
                   type="number"

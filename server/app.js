@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
 const propertyManagementRoutes = require("./routes/propertyManagement.route");
 const propertyListingRoutes = require("./routes/propertyListing.route");
+const chatRoutes = require("./routes/chat.route");
 
 const app = express();
 app.use(express.json());
@@ -20,5 +21,6 @@ app.use("/nest/v1/auth",authRoutes);
 app.use("/nest/v1/user",userRoutes);
 app.use("/nest/v1/property",propertyManagementRoutes);
 app.use("/nest/v1/listing",propertyListingRoutes);
+app.use("/nest/v1/chat",chatRoutes);
 
 module.exports = app;

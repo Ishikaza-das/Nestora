@@ -6,6 +6,7 @@ export const PropertyContext = createContext();
 export const PropertyProvider = ({ children }) => {
     const [userProperty, setUserProperty] = useState([]);
     const [singleProperty, setSingleProperty] = useState(null);
+    const [allProperty, setAllProperty] = useState(null);
 
     const fetchProperty = async () => {
         try {
@@ -39,8 +40,19 @@ export const PropertyProvider = ({ children }) => {
         }
     }
 
+    const fetchAllProperty = async () => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_PROPERTY_LISTING_API}/all-properties`,{withCredentials: true});
+            if(response.data.success){
+                setAllProperty(response.data.properties);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
   return (
-    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty, setSingleProperty}}>
+    <PropertyContext.Provider value={{ userProperty, refreshProperty, fetchSingleProperty, singleProperty, setSingleProperty, fetchAllProperty, allProperty}}>
       {children}
     </PropertyContext.Provider>
   )

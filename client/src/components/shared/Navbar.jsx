@@ -29,9 +29,6 @@ const Navbar = () => {
         <Link to="/about" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
           About
         </Link>
-        <Link to="" className="hover:text-yellow-500 transition-all duration-300 cursor-pointer">
-          Contact
-        </Link>
       </ul>
       {
         user ?(<div className="hidden md:flex"><ProfileCircle/></div>) : (
@@ -84,12 +81,6 @@ const Navbar = () => {
         >
           About
         </Link>
-        <li
-          className="hover:text-yellow-500 transition-all duration-300 cursor-pointer"
-          onClick={() => setIsOpen(false)}
-        >
-          Contact
-        </li>
         {
           user && (
             <>

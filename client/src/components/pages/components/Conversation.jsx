@@ -60,19 +60,20 @@ const Conversation = ({ chat, isMobile, setActiveChat }) => {
 
   return (
     <div className="flex flex-col h-full">
-      {isMobile && (
-        <div className="p-3 border-b bg-white">
+      <div className="p-4 border-b bg-white flex items-center gap-3">
+        {isMobile && (
           <button
             className="text-yellow-600 font-medium"
             onClick={() => setActiveChat(null)}
           >
-            ← Back
+            ←
           </button>
-          <p className="font-semibold text-gray-700">
-            {chat?.participants?.find((p) => p._id !== user._id)?.name}
-          </p>
-        </div>
-      )}
+        )}
+
+        <p className="font-semibold text-gray-700 text-lg">
+          {chat?.participants?.find((p) => p._id !== user._id)?.name || "User"}
+        </p>
+      </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.length === 0 && (

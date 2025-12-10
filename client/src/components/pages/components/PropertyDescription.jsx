@@ -47,6 +47,10 @@ const PropertyDescription = () => {
             </span>
           ))}
         </p>
+        <p>
+          <span className="font-semibold">Status:</span>{" "}
+          {singleProperty?.status.toUpperCase()}
+        </p>
 
         <hr className="my-4" />
         <div className="space-y-4 md:flex md:justify-between">

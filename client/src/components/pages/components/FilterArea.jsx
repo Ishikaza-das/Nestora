@@ -19,14 +19,16 @@ const FilterArea = ({ onFilter }) => {
   const [bathrooms, setBathrooms] = useState("");
 
   const applyFilters = () => {
-    onFilter({
-      keyword,
-      location,
-      minPrice: priceRange[0],
-      maxPrice: priceRange[1],
-      bedrooms,
-      bathrooms,
-    });
+    const filters = {};
+
+    if (keyword.trim()) filters.keyword = keyword.trim();
+    if (location.trim()) filters.location = location.trim();
+    if (priceRange[0] !== 5000) filters.minPrice = Number(priceRange[0]);
+    if (priceRange[1] !== 50000) filters.maxPrice = Number(priceRange[1]);
+    if (bedrooms) filters.bedrooms = Number(bedrooms);
+    if (bathrooms) filters.bathrooms = Number(bathrooms);
+
+    onFilter(filters);
   };
 
   const resetFilters = () => {
@@ -44,7 +46,6 @@ const FilterArea = ({ onFilter }) => {
       <h2 className="text-xl font-semibold mb-4">Filter Properties</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Keyword */}
         <div className="space-y-1">
           <Label>Keyword</Label>
           <Input
@@ -54,7 +55,6 @@ const FilterArea = ({ onFilter }) => {
           />
         </div>
 
-        {/* Location */}
         <div className="space-y-1">
           <Label>Location</Label>
           <Input
@@ -64,7 +64,6 @@ const FilterArea = ({ onFilter }) => {
           />
         </div>
 
-        {/* Price Range */}
         <div className="col-span-full space-y-1">
           <Label>Price Range (₹)</Label>
           <Slider
@@ -80,10 +79,9 @@ const FilterArea = ({ onFilter }) => {
           </div>
         </div>
 
-        {/* Bedrooms */}
         <div className="space-y-1">
           <Label>Bedrooms</Label>
-          <Select onValueChange={setBedrooms}>
+          <Select value={bedrooms} onValueChange={setBedrooms}>
             <SelectTrigger>
               <SelectValue placeholder="Any" />
             </SelectTrigger>
@@ -96,10 +94,9 @@ const FilterArea = ({ onFilter }) => {
           </Select>
         </div>
 
-        {/* Bathrooms */}
         <div className="space-y-1">
           <Label>Bathrooms</Label>
-          <Select onValueChange={setBathrooms}>
+          <Select value={bathrooms} onValueChange={setBathrooms}>
             <SelectTrigger>
               <SelectValue placeholder="Any" />
             </SelectTrigger>
@@ -113,7 +110,6 @@ const FilterArea = ({ onFilter }) => {
         </div>
       </div>
 
-      {/* Buttons */}
       <div className="flex justify-end gap-3 mt-6">
         <Button variant="outline" onClick={resetFilters}>
           Reset

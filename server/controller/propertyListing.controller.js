@@ -40,30 +40,33 @@ const getSingleProperty = async (req,res) => {
 const searchProperties = async (req, res) => {
   try {
     const {
-      location, minPrice, maxPrice,
-      bedrooms, bathrooms,
-      sortBy, order,
-      keyword
+      location,
+      minPrice,
+      maxPrice,
+      bedrooms,
+      bathrooms,
+      keyword,
+      sortBy,
+      order,
     } = req.query;
 
-    let filter = {};
+    let filter = { status: "available" };
 
     if (keyword) {
+      const bhkMatch = keyword.match(/(\d+)\s*bhk/i);
+      const types = ["apartment", "villa", "house", "studio"];
+      const foundType = types.find((t) => keyword.toLowerCase().includes(t));
+
       filter.$or = [
         { title: { $regex: keyword, $options: "i" } },
         { description: { $regex: keyword, $options: "i" } },
-        { location: { $regex: keyword, $options: "i" } }
+        { location: { $regex: keyword, $options: "i" } },
       ];
 
-      const bhkMatch = keyword.match(/(\d+)\s*bhk/i);
       if (bhkMatch) {
         filter.bedrooms = Number(bhkMatch[1]);
       }
 
-      const types = ["apartment", "villa", "house", "studio"];
-      const foundType = types.find(t =>
-        keyword.toLowerCase().includes(t.toLowerCase())
-      );
       if (foundType) {
         filter.propertyType = new RegExp(foundType, "i");
       }
@@ -75,14 +78,12 @@ const searchProperties = async (req, res) => {
 
     if (minPrice || maxPrice) {
       filter.price = {};
-      if (minPrice) filter.price.$gte = Number(minPrice);
-      if (maxPrice) filter.price.$lte = Number(maxPrice);
+      if (minPrice !== undefined) filter.price.$gte = Number(minPrice);
+      if (maxPrice !== undefined) filter.price.$lte = Number(maxPrice);
     }
 
     if (bedrooms) filter.bedrooms = Number(bedrooms);
     if (bathrooms) filter.bathrooms = Number(bathrooms);
-
-    filter.status = "available";
 
     let sortOptions = {};
     if (sortBy) sortOptions[sortBy] = order === "desc" ? -1 : 1;
@@ -92,16 +93,17 @@ const searchProperties = async (req, res) => {
     res.status(200).json({
       message: `${properties.length} results found`,
       properties,
-      success: true
+      success: true,
     });
-
   } catch (error) {
-    return res.status(400).json({
+    res.status(400).json({
       message: error.message,
-      success: false
+      success: false,
     });
   }
 };
+
+
 
 const coordinatesMapProperty = async (req,res) =>{
     try {
